@@ -4,7 +4,7 @@ namespace GildedRose.Console.Updaters
     {
         public void Update(Item item)
         {
-            // Do nothing
+            // Sulfuras is a legendary item — quality and sell-in never change
         }
     }
 }
