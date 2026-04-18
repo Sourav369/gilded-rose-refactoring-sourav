@@ -1,14 +1,10 @@
 using System.Collections.Generic;
+using GildedRose.Console.Updaters;
 
 namespace GildedRose.Console
 {
     public class GildedRoseService
     {
-        private const int MaxQuality = 50;
-        private const string AgedBrie = "Aged Brie";
-        private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
-        private const string BackstagePass = "Backstage passes to a TAFKAL80ETC concert";
-
         private readonly IList<Item> _items;
 
         public GildedRoseService(IList<Item> items)
@@ -20,83 +16,26 @@ namespace GildedRose.Console
         {
             foreach (var item in _items)
             {
-                UpdateItem(item);
+                var updater = GetUpdater(item);
+                updater.Update(item);
             }
         }
 
-        private void UpdateItem(Item item)
+        private IItemUpdater GetUpdater(Item item)
         {
-            if (item.Name == Sulfuras)
-                return;
-
-            if (item.Name == AgedBrie)
-                UpdateAgedBrie(item);
-            else if (item.Name == BackstagePass)
-                UpdateBackstagePass(item);
-            else
-                UpdateNormalItem(item);
-
-            item.SellIn--;
-        }
-
-        //  ITEM-SPECIFIC METHODS (CLEANED)
-
-        private void UpdateNormalItem(Item item)
-        {
-            DecreaseQuality(item);
-
-            if (item.SellIn <= 0)
+            switch (item.Name)
             {
-                DecreaseQuality(item);
-            }
-        }
+                case "Aged Brie":
+                    return new AgedBrieUpdater();
 
-        private void UpdateAgedBrie(Item item)
-        {
-            IncreaseQuality(item);
+                case "Backstage passes to a TAFKAL80ETC concert":
+                    return new BackstagePassUpdater();
 
-            if (item.SellIn <= 0)
-            {
-                IncreaseQuality(item);
-            }
-        }
+                case "Sulfuras, Hand of Ragnaros":
+                    return new SulfurasUpdater();
 
-        private void UpdateBackstagePass(Item item)
-        {
-            if (item.SellIn <= 0)
-            {
-                item.Quality = 0;
-                return;
-            }
-
-            IncreaseQuality(item);
-
-            if (item.SellIn <= 10)
-            {
-                IncreaseQuality(item);
-            }
-
-            if (item.SellIn <= 5)
-            {
-                IncreaseQuality(item);
-            }
-        }
-
-        //  HELPER METHODS
-
-        private void IncreaseQuality(Item item)
-        {
-            if (item.Quality < MaxQuality)
-            {
-                item.Quality++;
-            }
-        }
-
-        private void DecreaseQuality(Item item)
-        {
-            if (item.Quality > 0)
-            {
-                item.Quality--;
+                default:
+                    return new NormalItemUpdater();
             }
         }
     }
