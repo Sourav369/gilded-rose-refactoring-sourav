@@ -23,44 +23,32 @@ namespace GildedRose.Console
         {
             if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
             {
-                if (item.Quality > 0)
+                if (item.Name != "Sulfuras, Hand of Ragnaros")
                 {
-                    if (item.Name != "Sulfuras, Hand of Ragnaros")
-                    {
-                        item.Quality = item.Quality - 1;
-                    }
+                    DecreaseQuality(item);
                 }
             }
             else
             {
-                if (item.Quality < 50)
+                IncreaseQuality(item);
+
+                if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    item.Quality = item.Quality + 1;
-
-                    if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+                    if (item.SellIn < 11)
                     {
-                        if (item.SellIn < 11)
-                        {
-                            if (item.Quality < 50)
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
-                        }
+                        IncreaseQuality(item);
+                    }
 
-                        if (item.SellIn < 6)
-                        {
-                            if (item.Quality < 50)
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
-                        }
+                    if (item.SellIn < 6)
+                    {
+                        IncreaseQuality(item);
                     }
                 }
             }
 
             if (item.Name != "Sulfuras, Hand of Ragnaros")
             {
-                item.SellIn = item.SellIn - 1;
+                item.SellIn--;
             }
 
             if (item.SellIn < 0)
@@ -69,12 +57,9 @@ namespace GildedRose.Console
                 {
                     if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
                     {
-                        if (item.Quality > 0)
+                        if (item.Name != "Sulfuras, Hand of Ragnaros")
                         {
-                            if (item.Name != "Sulfuras, Hand of Ragnaros")
-                            {
-                                item.Quality = item.Quality - 1;
-                            }
+                            DecreaseQuality(item);
                         }
                     }
                     else
@@ -84,11 +69,26 @@ namespace GildedRose.Console
                 }
                 else
                 {
-                    if (item.Quality < 50)
-                    {
-                        item.Quality = item.Quality + 1;
-                    }
+                    IncreaseQuality(item);
                 }
+            }
+        }
+
+        // Helper Methods (Step 3.2)
+
+        private void IncreaseQuality(Item item)
+        {
+            if (item.Quality < 50)
+            {
+                item.Quality++;
+            }
+        }
+
+        private void DecreaseQuality(Item item)
+        {
+            if (item.Quality > 0)
+            {
+                item.Quality--;
             }
         }
     }
