@@ -1,89 +1,45 @@
 using System.Collections.Generic;
+using GildedRose.Console.Updaters;
 
 namespace GildedRose.Console
 {
     public class GildedRoseService
     {
+        private const string AgedBrie = "Aged Brie";
+        private const string BackstagePass = "Backstage passes to a TAFKAL80ETC concert";
+        private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
+
         private readonly IList<Item> _items;
 
-       public GildedRoseService(IList<Item> items)
+        public GildedRoseService(IList<Item> items)
         {
             _items = items;
         }
 
         public void UpdateQuality()
         {
-            for (var i = 0; i < _items.Count; i++)
+            foreach (Item item in _items)
             {
-                if (_items[i].Name != "Aged Brie" && _items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    if (_items[i].Quality > 0)
-                    {
-                        if (_items[i].Name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            _items[i].Quality = _items[i].Quality - 1;
-                        }
-                    }
-                }
-                else
-                {
-                    if (_items[i].Quality < 50)
-                    {
-                        _items[i].Quality = _items[i].Quality + 1;
+                IItemUpdater updater = GetUpdater(item);
+                updater.Update(item);
+            }
+        }
 
-                        if (_items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (_items[i].SellIn < 11)
-                            {
-                                if (_items[i].Quality < 50)
-                                {
-                                    _items[i].Quality = _items[i].Quality + 1;
-                                }
-                            }
+        private IItemUpdater GetUpdater(Item item)
+        {
+            switch (item.Name)
+            {
+                case AgedBrie:
+                    return new AgedBrieUpdater();
 
-                            if (_items[i].SellIn < 6)
-                            {
-                                if (_items[i].Quality < 50)
-                                {
-                                    _items[i].Quality = _items[i].Quality + 1;
-                                }
-                            }
-                        }
-                    }
-                }
+                case BackstagePass:
+                    return new BackstagePassUpdater();
 
-                if (_items[i].Name != "Sulfuras, Hand of Ragnaros")
-                {
-                    _items[i].SellIn = _items[i].SellIn - 1;
-                }
+                case Sulfuras:
+                    return new SulfurasUpdater();
 
-                if (_items[i].SellIn < 0)
-                {
-                    if (_items[i].Name != "Aged Brie")
-                    {
-                        if (_items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (_items[i].Quality > 0)
-                            {
-                                if (_items[i].Name != "Sulfuras, Hand of Ragnaros")
-                                {
-                                    _items[i].Quality = _items[i].Quality - 1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            _items[i].Quality = 0;
-                        }
-                    }
-                    else
-                    {
-                        if (_items[i].Quality < 50)
-                        {
-                            _items[i].Quality = _items[i].Quality + 1;
-                        }
-                    }
-                }
+                default:
+                    return new NormalItemUpdater();
             }
         }
     }
