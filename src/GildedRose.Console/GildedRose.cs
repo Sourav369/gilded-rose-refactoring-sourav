@@ -5,6 +5,10 @@ namespace GildedRose.Console
 {
     public class GildedRoseService
     {
+        private const string AgedBrie = "Aged Brie";
+        private const string BackstagePass = "Backstage passes to a TAFKAL80ETC concert";
+        private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
+
         private readonly IList<Item> _items;
 
         public GildedRoseService(IList<Item> items)
@@ -25,13 +29,13 @@ namespace GildedRose.Console
         {
             switch (item.Name)
             {
-                case "Aged Brie":
+                case AgedBrie:
                     return new AgedBrieUpdater();
 
-                case "Backstage passes to a TAFKAL80ETC concert":
+                case BackstagePass:
                     return new BackstagePassUpdater();
 
-                case "Sulfuras, Hand of Ragnaros":
+                case Sulfuras:
                     return new SulfurasUpdater();
 
                 default:
