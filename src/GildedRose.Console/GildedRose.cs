@@ -14,9 +14,9 @@ namespace GildedRose.Console
 
         public void UpdateQuality()
         {
-            foreach (var item in _items)
+            foreach (Item item in _items)
             {
-                var updater = GetUpdater(item);
+                IItemUpdater updater = GetUpdater(item);
                 updater.Update(item);
             }
         }

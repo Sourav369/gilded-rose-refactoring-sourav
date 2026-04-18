@@ -1,3 +1,5 @@
+using System;
+
 namespace GildedRose.Console.Updaters
 {
     public class BackstagePassUpdater : IItemUpdater
@@ -12,14 +14,10 @@ namespace GildedRose.Console.Updaters
             }
             else
             {
-                if (item.Quality < MaxQuality)
-                    item.Quality++;
-
-                if (item.SellIn <= 10 && item.Quality < MaxQuality)
-                    item.Quality++;
-
-                if (item.SellIn <= 5 && item.Quality < MaxQuality)
-                    item.Quality++;
+                int increase = 1;
+                if (item.SellIn <= 10) increase++;
+                if (item.SellIn <= 5)  increase++;
+                item.Quality = Math.Min(MaxQuality, item.Quality + increase);
             }
 
             item.SellIn--;
