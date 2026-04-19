@@ -28,7 +28,9 @@ namespace GildedRose.Console
         private IItemUpdater GetUpdater(Item item)
         {
             if (!string.IsNullOrEmpty(item.Name) && item.Name.Contains("Conjured"))
-            return new ConjuredItemUpdater();
+            {
+                return new ConjuredItemUpdater();
+            }
 
             switch (item.Name)
             {
