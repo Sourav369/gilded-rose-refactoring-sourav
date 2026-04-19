@@ -330,5 +330,64 @@ namespace GildedRose.Tests
             // Assert
             Assert.Equal(10, item.SellIn);
         }
+        // -------------------------------------------------------
+        // CONJURED ITEMS
+        // -------------------------------------------------------
+
+        [Fact]
+        public void ConjuredItem_BeforeSellDate_DegradesBy2()
+        {
+            // Arrange
+            var item = new Item { Name = "Conjured Mana Cake", SellIn = 5, Quality = 10 };
+            var app = new GildedRoseService(new List<Item> { item });
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert
+            Assert.Equal(8, item.Quality);
+        }
+
+        [Fact]
+        public void ConjuredItem_AfterSellDate_DegradesBy4()
+        {
+            // Arrange
+            var item = new Item { Name = "Conjured Mana Cake", SellIn = 0, Quality = 10 };
+            var app = new GildedRoseService(new List<Item> { item });
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert
+            Assert.Equal(6, item.Quality);
+        }
+
+        [Fact]
+        public void ConjuredItem_QualityNeverNegative_BeforeSellDate()
+        {
+            // Arrange
+            var item = new Item { Name = "Conjured Mana Cake", SellIn = 5, Quality = 1 };
+            var app = new GildedRoseService(new List<Item> { item });
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert
+            Assert.Equal(0, item.Quality);
+        }
+
+        [Fact]
+        public void ConjuredItem_QualityNeverNegative_AfterSellDate()
+        {
+            // Arrange
+            var item = new Item { Name = "Conjured Mana Cake", SellIn = 0, Quality = 2 };
+            var app = new GildedRoseService(new List<Item> { item });
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert
+            Assert.Equal(0, item.Quality);
+        }
     }
 }
