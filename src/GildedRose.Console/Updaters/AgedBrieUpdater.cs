@@ -1,5 +1,8 @@
 namespace GildedRose.Console.Updaters
 {
+    /// <summary>
+    /// Updates an Aged Brie item, which increases in quality over time.
+    /// </summary>
     public class AgedBrieUpdater : IItemUpdater
     {
         private const int MaxQuality = 50;

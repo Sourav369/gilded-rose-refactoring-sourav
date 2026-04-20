@@ -2,6 +2,9 @@
 
 namespace GildedRose.Console
 {
+    /// <summary>
+    /// Entry point of the application. Initializes inventory items and triggers the update process.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)

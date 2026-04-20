@@ -1,5 +1,8 @@
 namespace GildedRose.Console.Updaters
 {
+    /// <summary>
+    /// Updates a standard inventory item by degrading its quality over time.
+    /// </summary>
     public class NormalItemUpdater : IItemUpdater
     {
         public void Update(Item item)
