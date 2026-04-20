@@ -129,24 +129,6 @@ The commit history reflects the progression from characterization tests to refac
 
 ---
 
-## Project Structure
-
-src/
-├── GildedRose.Console
-│ ├── GildedRoseService.cs
-│ ├── Item.cs
-│ ├── Program.cs
-│ └── Updaters/
-│ ├── IItemUpdater.cs
-│ ├── NormalItemUpdater.cs
-│ ├── AgedBrieUpdater.cs
-│ ├── BackstagePassUpdater.cs
-│ ├── SulfurasUpdater.cs
-│ └── ConjuredItemUpdater.cs
-│
-└── GildedRose.Tests
-└── GildedRoseTests.cs
-
 ### How to Run
 
 Run the application:
