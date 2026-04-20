@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GildedRose.Console.Updaters;
 
@@ -13,7 +14,7 @@ namespace GildedRose.Console
 
         public GildedRoseService(IList<Item> items)
         {
-            _items = items;
+            _items = items ?? throw new ArgumentNullException(nameof(items));
         }
 
         public void UpdateQuality()
