@@ -1,11 +1,7 @@
 namespace GildedRose.Console.Updaters
 {
     /// <summary>
-    /// Updates an Aged Brie item.
-    /// Aged Brie increases in quality over time:
-    /// - Before sell date: +1
-    /// - After sell date: +2
-    /// Quality is capped at a maximum value of 50.
+    /// Updates an Aged Brie item, which increases in quality over time.
     /// </summary>
     public class AgedBrieUpdater : IItemUpdater
     {

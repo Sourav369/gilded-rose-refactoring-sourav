@@ -3,8 +3,7 @@
 namespace GildedRose.Console
 {
     /// <summary>
-    /// Entry point of the application.
-    /// Initializes sample items and triggers the update process using the GildedRoseService.
+    /// Entry point of the application. Initializes inventory items and triggers the update process.
     /// </summary>
     class Program
     {

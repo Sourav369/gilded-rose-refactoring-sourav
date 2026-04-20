@@ -1,8 +1,7 @@
 namespace GildedRose.Console.Updaters
 {
     /// <summary>
-    /// Defines a contract for updating item quality and sell-in values.
-    /// Each item type implements its own update logic based on specific business rules.
+    /// Defines the contract for updating an inventory item's quality and sell-in value.
     /// </summary>
     public interface IItemUpdater
     {

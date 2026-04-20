@@ -5,8 +5,7 @@ using GildedRose.Console.Updaters;
 namespace GildedRose.Console
 {
     /// <summary>
-    /// Core service responsible for updating the quality and sell-in values of items.
-    /// Delegates update logic to specific item updaters using a strategy-based approach.
+    /// Manages the daily update of quality and sell-in values for all inventory items.
     /// </summary>
     public class GildedRoseService
     {
@@ -18,7 +17,6 @@ namespace GildedRose.Console
 
         /// <summary>
         /// Initializes the service with a collection of items.
-        /// Throws an exception if the input collection is null to ensure safe usage.
         /// </summary>
         public GildedRoseService(IList<Item> items)
         {
@@ -26,7 +24,7 @@ namespace GildedRose.Console
         }
 
         /// <summary>
-        /// Iterates through all items and updates their state using the appropriate updater.
+        /// Updates all items by applying their respective update rules.
         /// </summary>
         public void UpdateQuality()
         {
@@ -38,8 +36,7 @@ namespace GildedRose.Console
         }
 
         /// <summary>
-        /// Determines the correct updater for a given item based on its name.
-        /// Uses a strategy pattern to map item types to their corresponding update logic.
+        /// Returns the appropriate updater for the given item.
         /// </summary>
         private IItemUpdater GetUpdater(Item item)
         {
@@ -49,7 +46,6 @@ namespace GildedRose.Console
                 return new ConjuredItemUpdater();
             }
 
-            // Select updater based on known item types
             switch (item.Name)
             {
                 case AgedBrie:
@@ -61,7 +57,6 @@ namespace GildedRose.Console
                 case Sulfuras:
                     return new SulfurasUpdater();
 
-                // Default behavior for normal items
                 default:
                     return new NormalItemUpdater();
             }

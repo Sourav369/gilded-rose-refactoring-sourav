@@ -3,13 +3,7 @@ using System;
 namespace GildedRose.Console.Updaters
 {
     /// <summary>
-    /// Updates a Backstage Pass item.
-    /// Quality increases as the concert date approaches:
-    /// - More than 10 days: +1
-    /// - 10 days or less: +2
-    /// - 5 days or less: +3
-    /// After the concert (sell date <= 0), quality drops to 0.
-    /// Quality is capped at a maximum value of 50.
+    /// Updates a Backstage Pass item, increasing quality as the concert date approaches.
     /// </summary>
     public class BackstagePassUpdater : IItemUpdater
     {

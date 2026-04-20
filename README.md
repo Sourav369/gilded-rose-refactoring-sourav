@@ -125,10 +125,27 @@ A null guard was added in the service constructor to prevent invalid input and e
 ## Development Approach
 
 The solution was developed incrementally using small commits. Each change was made in isolation and validated using tests to avoid regressions.
-
 The commit history reflects the progression from characterization tests to refactoring, feature addition, and final polish.
 
 ---
+
+## Project Structure
+
+src/
+├── GildedRose.Console
+│ ├── GildedRoseService.cs
+│ ├── Item.cs
+│ ├── Program.cs
+│ └── Updaters/
+│ ├── IItemUpdater.cs
+│ ├── NormalItemUpdater.cs
+│ ├── AgedBrieUpdater.cs
+│ ├── BackstagePassUpdater.cs
+│ ├── SulfurasUpdater.cs
+│ └── ConjuredItemUpdater.cs
+│
+└── GildedRose.Tests
+└── GildedRoseTests.cs
 
 ### How to Run
 

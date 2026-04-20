@@ -1,10 +1,7 @@
 namespace GildedRose.Console.Updaters
 {
     /// <summary>
-    /// Updates a Sulfuras item.
-    /// Sulfuras is a legendary item:
-    /// - Quality remains constant (always 80)
-    /// - Sell-in value does not decrease
+    /// Updates a Sulfuras item. As a legendary item, its quality and sell-in never change.
     /// </summary>
     public class SulfurasUpdater : IItemUpdater
     {

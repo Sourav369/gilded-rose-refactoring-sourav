@@ -1,11 +1,7 @@
 namespace GildedRose.Console.Updaters
 {
     /// <summary>
-    /// Updates a normal item.
-    /// Quality decreases over time:
-    /// - Before sell date: -1
-    /// - After sell date: -2
-    /// Quality is never allowed to go below 0.
+    /// Updates a standard inventory item by degrading its quality over time.
     /// </summary>
     public class NormalItemUpdater : IItemUpdater
     {
