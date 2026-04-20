@@ -2,6 +2,10 @@
 
 namespace GildedRose.Console
 {
+    /// <summary>
+    /// Entry point of the application.
+    /// Initializes sample items and triggers the update process using the GildedRoseService.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
